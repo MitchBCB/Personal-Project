@@ -26,7 +26,23 @@ function addTask() {
     
     // Create the list item
     const li = document.createElement('li');
-    li.textContent = taskText;
+    
+    // Create checkbox
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.addEventListener('change', function() {
+        if (checkbox.checked) {
+            taskSpan.style.textDecoration = 'line-through';
+            taskSpan.style.opacity = '0.5';
+        } else {
+            taskSpan.style.textDecoration = 'none';
+            taskSpan.style.opacity = '1';
+        }
+    });
+    
+    // Create span for task text
+    const taskSpan = document.createElement('span');
+    taskSpan.textContent = taskText;
     
     // Create delete button
     const deleteBtn = document.createElement('button');
@@ -36,7 +52,9 @@ function addTask() {
         li.remove();
     });
     
-    // Add delete button to the list item
+    // Add everything to the list item
+    li.appendChild(checkbox);
+    li.appendChild(taskSpan);
     li.appendChild(deleteBtn);
     
     // Add the list item to the list
