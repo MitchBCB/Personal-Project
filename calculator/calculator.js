@@ -176,6 +176,20 @@ document.addEventListener('keydown', function(event) {
         }
         updateDisplay();
     }
+    // Percentage button
+const percentButton = document.querySelector('.percent');
+percentButton.addEventListener('click', function() {
+    if (previousInput && operation) {
+        // Calculate percentage of the previous number
+        // Example: 200 + 10% = 200 + 20 (10% of 200)
+        const percent = (parseFloat(previousInput) * parseFloat(currentInput)) / 100;
+        currentInput = percent.toString();
+    } else {
+        // Just convert to decimal (50% = 0.5)
+        currentInput = (parseFloat(currentInput) / 100).toString();
+    }
+    updateDisplay();
+});
     
     // Escape or 'c' for clear
     if (key === 'Escape' || key === 'c' || key === 'C') {
@@ -186,3 +200,13 @@ document.addEventListener('keydown', function(event) {
         updateEquation();  // ADDED THIS
     }
 });
+// Percentage
+if (key === '%') {
+    if (previousInput && operation) {
+        const percent = (parseFloat(previousInput) * parseFloat(currentInput)) / 100;
+        currentInput = percent.toString();
+    } else {
+        currentInput = (parseFloat(currentInput) / 100).toString();
+    }
+    updateDisplay();
+}
