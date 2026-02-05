@@ -100,3 +100,66 @@ function calculate() {
 function updateDisplay() {
     display.textContent = currentInput;
 }
+// Keyboard support
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    
+    // Numbers and decimal point
+    if ((key >= '0' && key <= '9') || key === '.') {
+        // Prevent multiple decimal points
+        if (key === '.' && currentInput.includes('.')) {
+            return;
+        }
+        
+        if (currentInput === '0' && key !== '.') {
+            currentInput = key;
+        } else {
+            currentInput += key;
+        }
+        updateDisplay();
+    }
+    
+    // Operators
+    if (key === '+' || key === '-' || key === '*' || key === '/') {
+        if (operation !== null) {
+            calculate();
+        }
+        
+        previousInput = currentInput;
+        currentInput = '0';
+        
+        // Convert * to × and / to ÷ for display consistency
+        if (key === '*') {
+            operation = '×';
+        } else if (key === '/') {
+            operation = '÷';
+        } else {
+            operation = key;
+        }
+    }
+    
+    // Enter key for equals
+    if (key === 'Enter') {
+        event.preventDefault(); // Prevent form submission if in a form
+        calculate();
+    }
+    
+    // Backspace
+    if (key === 'Backspace') {
+        event.preventDefault(); // Prevent browser back button
+        if (currentInput.length > 1) {
+            currentInput = currentInput.slice(0, -1);
+        } else {
+            currentInput = '0';
+        }
+        updateDisplay();
+    }
+    
+    // Escape or 'c' for clear
+    if (key === 'Escape' || key === 'c' || key === 'C') {
+        currentInput = '0';
+        previousInput = '';
+        operation = null;
+        updateDisplay();
+    }
+});
