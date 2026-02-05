@@ -62,6 +62,7 @@ a:hover {
 
 #addButton:hover {
     background-color: #2980b9;
+    color:#000000
 }
 
 #taskList li {
