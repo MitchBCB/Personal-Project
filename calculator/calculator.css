@@ -87,3 +87,11 @@ body {
 .btn.zero {
     grid-column: span 2;
 }
+.btn.backspace {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.btn.backspace:hover {
+    background-color: #ff8787;
+}
