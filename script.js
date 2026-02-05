@@ -63,3 +63,7 @@ function addTask() {
     // Clear the input box
     input.value = '';
 }
+// Clear All button
+document.getElementById('clearButton').addEventListener('click', function() {
+    document.getElementById('taskList').innerHTML = '';
+});
