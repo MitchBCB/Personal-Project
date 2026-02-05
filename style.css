@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #060606;
     margin: 0;
     padding: 20px;
 }
@@ -17,7 +17,7 @@ h2 {
 
 p {
     line-height: 1.6;
-    color: #333;
+    color: #ff009d;
 }
 
 ul {
@@ -38,6 +38,6 @@ a {
 }
 
 a:hover {
-    color: #2980b9;
+    color: #ff009d;
     text-decoration: underline;
 }
