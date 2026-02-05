@@ -23,12 +23,22 @@ body {
 .display {
     background-color: #444;
     color: #fff;
-    font-size: 48px;
     padding: 20px;
-    text-align: right;
     border-radius: 5px;
     margin-bottom: 10px;
-    min-height: 80px;
+    min-height: 100px;
+}
+
+.equation {
+    font-size: 20px;
+    color: #999;
+    min-height: 25px;
+    text-align: right;
+}
+
+.current {
+    font-size: 48px;
+    text-align: right;
     word-wrap: break-word;
 }
 

@@ -2,8 +2,6 @@ let currentInput = '0';
 let previousInput = '';
 let operation = null;
 
-const display = document.getElementById('display');
-
 // Get all buttons
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
@@ -47,6 +45,7 @@ operatorButtons.forEach(button => {
         previousInput = currentInput;
         currentInput = '0';
         operation = op;
+        updateEquation();  // ADDED THIS
     });
 });
 
@@ -59,6 +58,7 @@ clearButton.addEventListener('click', function() {
     previousInput = '';
     operation = null;
     updateDisplay();
+    updateEquation();  // ADDED THIS
 });
 
 // Backspace button
@@ -100,11 +100,22 @@ function calculate() {
     operation = null;
     previousInput = '';
     updateDisplay();
+    updateEquation();  // ADDED THIS
 }
 
 function updateDisplay() {
-    display.textContent = currentInput;
+    document.getElementById('current').textContent = currentInput;
 }
+
+function updateEquation() {
+    const equationDisplay = document.getElementById('equation');
+    if (previousInput && operation) {
+        equationDisplay.textContent = previousInput + ' ' + operation;
+    } else {
+        equationDisplay.textContent = '';
+    }
+}
+
 // Keyboard support
 document.addEventListener('keydown', function(event) {
     const key = event.key;
@@ -125,28 +136,30 @@ document.addEventListener('keydown', function(event) {
     }
     
     // Operators
-if (key === '+' || key === '-' || key === '*' || key === '/') {
-    // Don't process if current input is just '0' and we already have an operation
-    if (currentInput === '0' && operation !== null) {
-        return;  // Ignore the keypress
+    if (key === '+' || key === '-' || key === '*' || key === '/') {
+        // Don't process if current input is just '0' and we already have an operation
+        if (currentInput === '0' && operation !== null) {
+            return;  // Ignore the keypress
+        }
+        
+        if (operation !== null) {
+            calculate();
+        }
+        
+        previousInput = currentInput;
+        currentInput = '0';
+        
+        // Convert * to × and / to ÷ for display consistency
+        if (key === '*') {
+            operation = '×';
+        } else if (key === '/') {
+            operation = '÷';
+        } else {
+            operation = key;
+        }
+        updateEquation();  // ADDED THIS
     }
     
-    if (operation !== null) {
-        calculate();
-    }
-    
-    previousInput = currentInput;
-    currentInput = '0';
-    
-    // Convert * to × and / to ÷ for display consistency
-    if (key === '*') {
-        operation = '×';
-    } else if (key === '/') {
-        operation = '÷';
-    } else {
-        operation = key;
-    }
-}
     // Enter key for equals
     if (key === 'Enter') {
         event.preventDefault(); // Prevent form submission if in a form
@@ -170,5 +183,6 @@ if (key === '+' || key === '-' || key === '*' || key === '/') {
         previousInput = '';
         operation = null;
         updateDisplay();
+        updateEquation();  // ADDED THIS
     }
 });
