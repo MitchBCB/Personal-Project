@@ -35,6 +35,11 @@ operatorButtons.forEach(button => {
     button.addEventListener('click', function() {
         const op = button.textContent;
         
+        // Don't process if current input is just '0' and we already have an operation
+        if (currentInput === '0' && operation !== null) {
+            return;
+        }
+        
         if (operation !== null) {
             calculate();
         }
@@ -120,24 +125,28 @@ document.addEventListener('keydown', function(event) {
     }
     
     // Operators
-    if (key === '+' || key === '-' || key === '*' || key === '/') {
-        if (operation !== null) {
-            calculate();
-        }
-        
-        previousInput = currentInput;
-        currentInput = '0';
-        
-        // Convert * to × and / to ÷ for display consistency
-        if (key === '*') {
-            operation = '×';
-        } else if (key === '/') {
-            operation = '÷';
-        } else {
-            operation = key;
-        }
+if (key === '+' || key === '-' || key === '*' || key === '/') {
+    // Don't process if current input is just '0' and we already have an operation
+    if (currentInput === '0' && operation !== null) {
+        return;  // Ignore the keypress
     }
     
+    if (operation !== null) {
+        calculate();
+    }
+    
+    previousInput = currentInput;
+    currentInput = '0';
+    
+    // Convert * to × and / to ÷ for display consistency
+    if (key === '*') {
+        operation = '×';
+    } else if (key === '/') {
+        operation = '÷';
+    } else {
+        operation = key;
+    }
+}
     // Enter key for equals
     if (key === 'Enter') {
         event.preventDefault(); // Prevent form submission if in a form
