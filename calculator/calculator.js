@@ -15,7 +15,12 @@ numberButtons.forEach(button => {
     button.addEventListener('click', function() {
         const num = button.textContent;
         
-        if (currentInput === '0') {
+        // Prevent multiple decimal points
+        if (num === '.' && currentInput.includes('.')) {
+            return;  // Stop if there's already a decimal
+        }
+        
+        if (currentInput === '0' && num !== '.') {
             currentInput = num;
         } else {
             currentInput += num;
