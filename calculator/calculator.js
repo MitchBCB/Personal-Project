@@ -54,14 +54,15 @@ clearButton.addEventListener('click', function() {
     previousInput = '';
     operation = null;
     updateDisplay();
-    
+});
+
 // Backspace button
 const backspaceButton = document.querySelector('.backspace');
 backspaceButton.addEventListener('click', function() {
     if (currentInput.length > 1) {
-        currentInput = currentInput.slice(0, -1);  // Remove last character
+        currentInput = currentInput.slice(0, -1);
     } else {
-        currentInput = '0';  // If only one digit, reset to 0
+        currentInput = '0';
     }
     updateDisplay();
 });
