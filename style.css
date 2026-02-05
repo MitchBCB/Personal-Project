@@ -52,7 +52,7 @@ a:hover {
 
 #addButton {
     padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #000000;
     color: rgb(255, 255, 255);
     border: none;
     border-radius: 5px;
@@ -61,7 +61,7 @@ a:hover {
 }
 
 #addButton:hover {
-    background-color: #2980b9;
+    background-color: #ffffff;
     color:#000000
 }
 
