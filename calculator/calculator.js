@@ -15,7 +15,7 @@ numberButtons.forEach(button => {
         
         // Prevent multiple decimal points
         if (num === '.' && currentInput.includes('.')) {
-            return;  // Stop if there's already a decimal
+            return;
         }
         
         if (currentInput === '0' && num !== '.') {
@@ -33,7 +33,6 @@ operatorButtons.forEach(button => {
     button.addEventListener('click', function() {
         const op = button.textContent;
         
-        // Don't process if current input is just '0' and we already have an operation
         if (currentInput === '0' && operation !== null) {
             return;
         }
@@ -45,7 +44,7 @@ operatorButtons.forEach(button => {
         previousInput = currentInput;
         currentInput = '0';
         operation = op;
-        updateEquation();  // ADDED THIS
+        updateEquation();
     });
 });
 
@@ -58,7 +57,7 @@ clearButton.addEventListener('click', function() {
     previousInput = '';
     operation = null;
     updateDisplay();
-    updateEquation();  // ADDED THIS
+    updateEquation();
 });
 
 // Backspace button
@@ -68,6 +67,18 @@ backspaceButton.addEventListener('click', function() {
         currentInput = currentInput.slice(0, -1);
     } else {
         currentInput = '0';
+    }
+    updateDisplay();
+});
+
+// Percentage button
+const percentButton = document.querySelector('.percent');
+percentButton.addEventListener('click', function() {
+    if (previousInput && operation) {
+        const percent = (parseFloat(previousInput) * parseFloat(currentInput)) / 100;
+        currentInput = percent.toString();
+    } else {
+        currentInput = (parseFloat(currentInput) / 100).toString();
     }
     updateDisplay();
 });
@@ -100,7 +111,7 @@ function calculate() {
     operation = null;
     previousInput = '';
     updateDisplay();
-    updateEquation();  // ADDED THIS
+    updateEquation();
 }
 
 function updateDisplay() {
@@ -117,96 +128,4 @@ function updateEquation() {
 }
 
 // Keyboard support
-document.addEventListener('keydown', function(event) {
-    const key = event.key;
-    
-    // Numbers and decimal point
-    if ((key >= '0' && key <= '9') || key === '.') {
-        // Prevent multiple decimal points
-        if (key === '.' && currentInput.includes('.')) {
-            return;
-        }
-        
-        if (currentInput === '0' && key !== '.') {
-            currentInput = key;
-        } else {
-            currentInput += key;
-        }
-        updateDisplay();
-    }
-    
-    // Operators
-    if (key === '+' || key === '-' || key === '*' || key === '/') {
-        // Don't process if current input is just '0' and we already have an operation
-        if (currentInput === '0' && operation !== null) {
-            return;  // Ignore the keypress
-        }
-        
-        if (operation !== null) {
-            calculate();
-        }
-        
-        previousInput = currentInput;
-        currentInput = '0';
-        
-        // Convert * to × and / to ÷ for display consistency
-        if (key === '*') {
-            operation = '×';
-        } else if (key === '/') {
-            operation = '÷';
-        } else {
-            operation = key;
-        }
-        updateEquation();  // ADDED THIS
-    }
-    
-    // Enter key for equals
-    if (key === 'Enter') {
-        event.preventDefault(); // Prevent form submission if in a form
-        calculate();
-    }
-    
-    // Backspace
-    if (key === 'Backspace') {
-        event.preventDefault(); // Prevent browser back button
-        if (currentInput.length > 1) {
-            currentInput = currentInput.slice(0, -1);
-        } else {
-            currentInput = '0';
-        }
-        updateDisplay();
-    }
-    // Percentage button
-const percentButton = document.querySelector('.percent');
-percentButton.addEventListener('click', function() {
-    if (previousInput && operation) {
-        // Calculate percentage of the previous number
-        // Example: 200 + 10% = 200 + 20 (10% of 200)
-        const percent = (parseFloat(previousInput) * parseFloat(currentInput)) / 100;
-        currentInput = percent.toString();
-    } else {
-        // Just convert to decimal (50% = 0.5)
-        currentInput = (parseFloat(currentInput) / 100).toString();
-    }
-    updateDisplay();
-});
-    
-    // Escape or 'c' for clear
-    if (key === 'Escape' || key === 'c' || key === 'C') {
-        currentInput = '0';
-        previousInput = '';
-        operation = null;
-        updateDisplay();
-        updateEquation();  // ADDED THIS
-    }
-});
-// Percentage
-if (key === '%') {
-    if (previousInput && operation) {
-        const percent = (parseFloat(previousInput) * parseFloat(currentInput)) / 100;
-        currentInput = percent.toString();
-    } else {
-        currentInput = (parseFloat(currentInput) / 100).toString();
-    }
-    updateDisplay();
-}
+document.addE
