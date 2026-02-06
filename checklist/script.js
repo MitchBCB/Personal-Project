@@ -1,128 +1,126 @@
-// Color button code (keep this)
-document.getElementById('colorButton').addEventListener('click', function() {
+// Minimal refactor: cached DOM refs, storage key, event delegation.
+// Behavior preserved (add / delete / complete / clear, color button, Enter to add).
+
+const STORAGE_KEY = 'tasks';
+const colorButton = document.getElementById('colorButton');
+const addButton = document.getElementById('addButton');
+const taskInput = document.getElementById('taskInput');
+const taskList = document.getElementById('taskList');
+const clearButton = document.getElementById('clearButton');
+
+// Color button
+colorButton.addEventListener('click', () => {
     const colors = ['#006b39', '#1a1a2e', '#16213e', '#0f3460', '#533483'];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     document.body.style.backgroundColor = randomColor;
 });
 
-// To-Do List code
-document.getElementById('addButton').addEventListener('click', addTask);
+// Add task
+addButton.addEventListener('click', addTask);
+taskInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addTask();
+});
 
-document.getElementById('taskInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        addTask();
+// Load tasks on page load
+window.addEventListener('load', loadTasks);
+
+// Event delegation for checkbox and delete button
+taskList.addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    const id = Number(li.dataset.id);
+
+    // Delete button
+    if (e.target.classList.contains('deleteBtn')) {
+        li.remove();
+        deleteTask(id);
+        return;
+    }
+
+    // Checkbox toggle
+    if (e.target.matches('input[type="checkbox"]')) {
+        const checked = e.target.checked;
+        const span = li.querySelector('span');
+        if (span) {
+            span.style.textDecoration = checked ? 'line-through' : 'none';
+            span.style.opacity = checked ? '0.5' : '1';
+        }
+        updateTaskStatus(id, checked);
     }
 });
 
-// Load tasks when page loads
-window.addEventListener('load', loadTasks);
-
 function addTask() {
-    const input = document.getElementById('taskInput');
-    const taskText = input.value.trim();
-    
-    if (taskText === '') {
-        return;
-    }
-    
-    // Create task object
+    const taskText = taskInput.value.trim();
+    if (taskText === '') return;
+
     const task = {
         text: taskText,
         completed: false,
-        id: Date.now() // unique ID using timestamp
+        id: Date.now()
     };
-    
-    // Save to storage
+
     saveTask(task);
-    
-    // Display the task
     displayTask(task);
-    
-    // Clear input
-    input.value = '';
+    taskInput.value = '';
 }
 
 function displayTask(task) {
     const li = document.createElement('li');
     li.dataset.id = task.id;
-    
-    // Create checkbox
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = task.completed;
-    checkbox.addEventListener('change', function() {
-        const taskSpan = li.querySelector('span');
-        if (checkbox.checked) {
-            taskSpan.style.textDecoration = 'line-through';
-            taskSpan.style.opacity = '0.5';
-        } else {
-            taskSpan.style.textDecoration = 'none';
-            taskSpan.style.opacity = '1';
-        }
-        updateTaskStatus(task.id, checkbox.checked);
-    });
-    
-    // Create span for task text
+
     const taskSpan = document.createElement('span');
     taskSpan.textContent = task.text;
     if (task.completed) {
         taskSpan.style.textDecoration = 'line-through';
         taskSpan.style.opacity = '0.5';
     }
-    
-    // Create delete button
+
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = 'Delete';
     deleteBtn.className = 'deleteBtn';
-    deleteBtn.addEventListener('click', function() {
-        li.remove();
-        deleteTask(task.id);
-    });
-    
-    // Add everything to list item
+
     li.appendChild(checkbox);
     li.appendChild(taskSpan);
     li.appendChild(deleteBtn);
-    
-    // Add to page
-    document.getElementById('taskList').appendChild(li);
+
+    taskList.appendChild(li);
 }
 
 function saveTask(task) {
-    let tasks = getTasks();
+    const tasks = getTasks();
     tasks.push(task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
 function getTasks() {
-    const tasks = localStorage.getItem('tasks');
+    const tasks = localStorage.getItem(STORAGE_KEY);
     return tasks ? JSON.parse(tasks) : [];
 }
 
 function loadTasks() {
     const tasks = getTasks();
-    tasks.forEach(task => displayTask(task));
+    tasks.forEach(displayTask);
 }
 
 function updateTaskStatus(id, completed) {
-    let tasks = getTasks();
-    tasks = tasks.map(task => {
-        if (task.id === id) {
-            task.completed = completed;
-        }
+    const tasks = getTasks().map(task => {
+        if (task.id === id) task.completed = completed;
         return task;
     });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
 function deleteTask(id) {
-    let tasks = getTasks();
-    tasks = tasks.filter(task => task.id !== id);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    const tasks = getTasks().filter(task => task.id !== id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
-// Clear All button
-document.getElementById('clearButton').addEventListener('click', function() {
-    document.getElementById('taskList').innerHTML = '';
-    localStorage.removeItem('tasks');
+// Clear All
+clearButton.addEventListener('click', () => {
+    taskList.innerHTML = '';
+    localStorage.removeItem(STORAGE_KEY);
 });
