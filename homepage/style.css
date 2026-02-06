@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #0a0a0a;
@@ -11,47 +10,28 @@ body {
     min-height: 100vh;
     padding: 20px;
 }
-
 .container {
     max-width: 1100px;
     margin: 0 auto;
 }
-
 header {
     text-align: center;
     padding: 80px 20px 60px;
 }
-
 header h1 {
     font-size: 56px;
     font-weight: 800;
     margin-bottom: 15px;
-    background: linear-gradient(90deg, 
-        #ff0000 0%, 
-        #ff0000 10%,
-        #ff7f00 10%, 
-        #ff7f00 22%,
-        #ffff00 22%, 
-        #ffff00 35%,
-        #00ff00 35%, 
-        #00ff00 48%,
-        #0000ff 48%, 
-        #0000ff 61%,
-        #4b0082 61%, 
-        #4b0082 74%,
-        #9400d3 74%, 
-        #9400d3 100%);
+    background: linear-gradient(90deg, #ff0000 0%, #ff7f00 14.28%, #ffff00 28.56%, #00ff00 42.84%, #0000ff 57.12%, #4b0082 71.4%, #9400d3 85.68%, #ff0000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
 .intro {
     font-size: 18px;
     color: #888;
     font-weight: 300;
 }
-
 .projects h2 {
     font-size: 28px;
     margin-bottom: 40px;
@@ -59,14 +39,12 @@ header h1 {
     color: #fff;
     font-weight: 600;
 }
-
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     margin-bottom: 60px;
 }
-
 .project-card {
     background: #1a1a1a;
     border-radius: 16px;
@@ -76,7 +54,6 @@ header h1 {
     position: relative;
     overflow: hidden;
 }
-
 .project-card::before {
     content: '';
     position: absolute;
@@ -86,91 +63,74 @@ header h1 {
     height: 4px;
     transition: transform 0.3s;
 }
-
 /* Rainbow colors for each project */
 .project-card:nth-child(1)::before {
     background: #ff0000; /* Red */
     transform: scaleX(0);
 }
-
 .project-card:nth-child(2)::before {
     background: #ff7f00; /* Orange */
     transform: scaleX(0);
 }
-
 .project-card:nth-child(3)::before {
     background: #ffff00; /* Yellow */
     transform: scaleX(0);
 }
-
 .project-card:nth-child(4)::before {
     background: #00ff00; /* Green */
     transform: scaleX(0);
 }
-
 .project-card:nth-child(5)::before {
     background: #0000ff; /* Blue */
     transform: scaleX(0);
 }
-
 .project-card:nth-child(6)::before {
     background: #4b0082; /* Indigo */
     transform: scaleX(0);
 }
-
 .project-card:nth-child(7)::before {
     background: #9400d3; /* Violet */
     transform: scaleX(0);
 }
-
 .project-card:hover::before {
     transform: scaleX(1);
 }
-
 .project-card:hover {
     transform: translateY(-8px);
     border-color: #3a3a3a;
 }
-
 /* Red glow for first project */
 .project-card:nth-child(1):hover {
     box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
 }
-
 /* Orange glow for second project */
 .project-card:nth-child(2):hover {
     box-shadow: 0 20px 40px rgba(255, 127, 0, 0.2);
 }
-
 .project-card h3 {
     font-size: 26px;
     margin-bottom: 12px;
     color: #fff;
     font-weight: 700;
 }
-
 /* Red for checklist */
 .project-card:nth-child(1) h3 {
     color: #ff0000;
 }
-
 /* Orange for calculator */
 .project-card:nth-child(2) h3 {
     color: #ff7f00;
 }
-
 /* Yellow for third project (when you add it) */
 .project-card:nth-child(3) h3 {
     color: #ffff00;
 }
-
 .project-card p {
     color: #999;
     line-height: 1.7;
     margin-bottom: 25px;
     font-size: 15px;
 }
-
 .btn {
     display: inline-block;
     padding: 12px 28px;
@@ -183,27 +143,22 @@ header h1 {
     letter-spacing: 0.5px;
     transition: all 0.3s;
 }
-
 /* Red button for checklist */
 .project-card:nth-child(1) .btn {
     background: #ff0000;
 }
-
 /* Orange button for calculator */
 .project-card:nth-child(2) .btn {
     background: #ff7f00;
 }
-
 /* Yellow button for third project */
 .project-card:nth-child(3) .btn {
     background: #ffff00;
 }
-
 .btn:hover {
     transform: scale(1.05);
     filter: brightness(1.2);
 }
-
 footer {
     text-align: center;
     padding: 40px 20px;
@@ -211,7 +166,6 @@ footer {
     font-size: 13px;
     border-top: 1px solid #222;
 }
-
 /* Responsive */
 @media (max-width: 768px) {
     header h1 {
