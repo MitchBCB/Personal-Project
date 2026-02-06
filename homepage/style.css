@@ -1,4 +1,4 @@
-* {
+i like this one more just check the title has all the colours * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,27 +22,10 @@ header h1 {
     font-size: 56px;
     font-weight: 800;
     margin-bottom: 15px;
-    background: linear-gradient(to right, 
-        #ff0000 0%, 
-        #ff0000 12%, 
-        #ff7f00 12%, 
-        #ff7f00 24%, 
-        #ffff00 24%, 
-        #ffff00 37%, 
-        #00ff00 37%, 
-        #00ff00 50%, 
-        #0000ff 50%, 
-        #0000ff 63%, 
-        #4b0082 63%, 
-        #4b0082 76%, 
-        #9400d3 76%, 
-        #9400d3 88%,
-        #ff0000 88%,
-        #ff0000 100%);
+    background: linear-gradient(90deg, #ff0000 0%, #ff7f00 14.28%, #ffff00 28.56%, #00ff00 42.84%, #0000ff 57.12%, #4b0082 71.4%, #9400d3 85.68%, #ff0000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    background-size: 100%;
 }
 .intro {
     font-size: 18px;
