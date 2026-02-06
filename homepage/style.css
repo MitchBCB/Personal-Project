@@ -26,7 +26,7 @@ header h1 {
     font-size: 56px;
     font-weight: 800;
     margin-bottom: 15px;
-    background: linear-gradient(135deg, #00f5ff 0%, #ff00e6 50%, #ffed00 100%);
+    background: linear-gradient(90deg, #ff0000 0%, #ff7f00 14.28%, #ffff00 28.56%, #00ff00 42.84%, #0000ff 57.12%, #4b0082 71.4%, #9400d3 85.68%, #ff0000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -70,9 +70,43 @@ header h1 {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #00f5ff, #ff00e6, #ffed00);
-    transform: scaleX(0);
     transition: transform 0.3s;
+}
+
+/* Rainbow colors for each project */
+.project-card:nth-child(1)::before {
+    background: #ff0000; /* Red */
+    transform: scaleX(0);
+}
+
+.project-card:nth-child(2)::before {
+    background: #ff7f00; /* Orange */
+    transform: scaleX(0);
+}
+
+.project-card:nth-child(3)::before {
+    background: #ffff00; /* Yellow */
+    transform: scaleX(0);
+}
+
+.project-card:nth-child(4)::before {
+    background: #00ff00; /* Green */
+    transform: scaleX(0);
+}
+
+.project-card:nth-child(5)::before {
+    background: #0000ff; /* Blue */
+    transform: scaleX(0);
+}
+
+.project-card:nth-child(6)::before {
+    background: #4b0082; /* Indigo */
+    transform: scaleX(0);
+}
+
+.project-card:nth-child(7)::before {
+    background: #9400d3; /* Violet */
+    transform: scaleX(0);
 }
 
 .project-card:hover::before {
@@ -82,7 +116,16 @@ header h1 {
 .project-card:hover {
     transform: translateY(-8px);
     border-color: #3a3a3a;
-    box-shadow: 0 20px 40px rgba(0, 245, 255, 0.1);
+}
+
+/* Red glow for first project */
+.project-card:nth-child(1):hover {
+    box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+}
+
+/* Orange glow for second project */
+.project-card:nth-child(2):hover {
+    box-shadow: 0 20px 40px rgba(255, 127, 0, 0.2);
 }
 
 .project-card h3 {
@@ -92,12 +135,19 @@ header h1 {
     font-weight: 700;
 }
 
+/* Red for checklist */
 .project-card:nth-child(1) h3 {
-    color: #00f5ff;
+    color: #ff0000;
 }
 
+/* Orange for calculator */
 .project-card:nth-child(2) h3 {
-    color: #ff00e6;
+    color: #ff7f00;
+}
+
+/* Yellow for third project (when you add it) */
+.project-card:nth-child(3) h3 {
+    color: #ffff00;
 }
 
 .project-card p {
@@ -110,7 +160,6 @@ header h1 {
 .btn {
     display: inline-block;
     padding: 12px 28px;
-    background: #fff;
     color: #0a0a0a;
     text-decoration: none;
     border-radius: 8px;
@@ -121,17 +170,24 @@ header h1 {
     transition: all 0.3s;
 }
 
+/* Red button for checklist */
 .project-card:nth-child(1) .btn {
-    background: #00f5ff;
+    background: #ff0000;
 }
 
+/* Orange button for calculator */
 .project-card:nth-child(2) .btn {
-    background: #ff00e6;
+    background: #ff7f00;
+}
+
+/* Yellow button for third project */
+.project-card:nth-child(3) .btn {
+    background: #ffff00;
 }
 
 .btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    filter: brightness(1.2);
 }
 
 footer {
