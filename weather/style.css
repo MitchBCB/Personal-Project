@@ -6,26 +6,28 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: #1a1a1a;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    transition: background 0.5s ease;
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     max-width: 500px;
     width: 100%;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #fff;
     margin-bottom: 30px;
     font-size: 36px;
 }
@@ -40,81 +42,61 @@ h1 {
     flex: 1;
     padding: 15px;
     font-size: 16px;
-    border: 2px solid #ddd;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
+    color: #fff;
     outline: none;
-    transition: border-color 0.3s;
 }
 
-#cityInput:focus {
-    border-color: #667eea;
+#cityInput::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 #searchBtn {
     padding: 15px 30px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: rgba(255, 255, 255, 0.2);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s;
 }
 
 #searchBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-}
-
-#searchBtn:active {
-    transform: translateY(0);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .weather-display {
     text-align: center;
     padding: 20px;
+    color: #fff;
 }
 
 .instruction {
-    color: #999;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 18px;
-}
-
-.weather-info {
-    animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .city-name {
     font-size: 32px;
-    color: #333;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
 .temperature {
     font-size: 64px;
-    color: #667eea;
     font-weight: bold;
     margin: 20px 0;
 }
 
 .description {
     font-size: 24px;
-    color: #666;
     text-transform: capitalize;
     margin-bottom: 20px;
+    opacity: 0.9;
 }
 
 .details {
@@ -125,30 +107,28 @@ h1 {
 }
 
 .detail-item {
-    background: #f8f9fa;
+    background: rgba(255, 255, 255, 0.1);
     padding: 15px;
     border-radius: 10px;
 }
 
 .detail-label {
     font-size: 14px;
-    color: #999;
+    opacity: 0.7;
     margin-bottom: 5px;
 }
 
 .detail-value {
     font-size: 20px;
-    color: #333;
     font-weight: bold;
 }
 
 .error {
-    color: #e74c3c;
+    color: #ff6b6b;
     font-size: 18px;
-    padding: 20px;
 }
 
 .loading {
-    color: #667eea;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 18px;
 }
