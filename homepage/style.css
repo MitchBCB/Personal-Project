@@ -1,4 +1,4 @@
-i like this one more just check the title has all the colours * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,7 +22,7 @@ header h1 {
     font-size: 56px;
     font-weight: 800;
     margin-bottom: 15px;
-    background: linear-gradient(90deg, #ff0000 14.285%, #ff7f00 14.285%, #ffff00 14.285%, #00ff00 14.285%, #0000ff 14.285%, #4b0082 14.285%, #9400d3 14.285%);
+    background: linear-gradient(90deg, #ff0000 0%, #ff7f00 14.28%, #ffff00 28.56%, #00ff00 42.84%, #0000ff 57.12%, #4b0082 71.4%, #9400d3 85.68%, #ff0000 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
