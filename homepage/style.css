@@ -26,10 +26,25 @@ header h1 {
     font-size: 56px;
     font-weight: 800;
     margin-bottom: 15px;
-    background: linear-gradient(90deg, #ff0000 0%, #ff7f00 14.28%, #ffff00 28.56%, #00ff00 42.84%, #0000ff 57.12%, #4b0082 71.4%, #9400d3 85.68%, #ff0000 100%);
+    background: linear-gradient(to right, 
+        #ff0000 0%, 
+        #ff0000 14%, 
+        #ff7f00 14%, 
+        #ff7f00 28%, 
+        #ffff00 28%, 
+        #ffff00 42%, 
+        #00ff00 42%, 
+        #00ff00 57%, 
+        #0099ff 57%, 
+        #0099ff 71%, 
+        #4b0082 71%, 
+        #4b0082 85%, 
+        #9400d3 85%, 
+        #9400d3 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% auto;
 }
 
 .intro {
@@ -73,39 +88,39 @@ header h1 {
     transition: transform 0.3s;
 }
 
-/* Rainbow colors for each project */
+/* Rainbow colors for each project - VIBRANT */
 .project-card:nth-child(1)::before {
-    background: #ff0000; /* Red */
+    background: #ff1744; /* Vibrant Red */
     transform: scaleX(0);
 }
 
 .project-card:nth-child(2)::before {
-    background: #ff7f00; /* Orange */
+    background: #ff9100; /* Vibrant Orange */
     transform: scaleX(0);
 }
 
 .project-card:nth-child(3)::before {
-    background: #ffff00; /* Yellow */
+    background: #ffea00; /* Vibrant Yellow */
     transform: scaleX(0);
 }
 
 .project-card:nth-child(4)::before {
-    background: #00ff00; /* Green */
+    background: #00e676; /* Vibrant Green */
     transform: scaleX(0);
 }
 
 .project-card:nth-child(5)::before {
-    background: #0000ff; /* Blue */
+    background: #00b0ff; /* Vibrant Blue */
     transform: scaleX(0);
 }
 
 .project-card:nth-child(6)::before {
-    background: #4b0082; /* Indigo */
+    background: #651fff; /* Vibrant Indigo */
     transform: scaleX(0);
 }
 
 .project-card:nth-child(7)::before {
-    background: #9400d3; /* Violet */
+    background: #d500f9; /* Vibrant Violet */
     transform: scaleX(0);
 }
 
@@ -118,14 +133,17 @@ header h1 {
     border-color: #3a3a3a;
 }
 
-/* Red glow for first project */
+/* Vibrant glows for each project */
 .project-card:nth-child(1):hover {
-    box-shadow: 0 20px 40px rgba(255, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(255, 23, 68, 0.3);
 }
 
-/* Orange glow for second project */
 .project-card:nth-child(2):hover {
-    box-shadow: 0 20px 40px rgba(255, 127, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(255, 145, 0, 0.3);
+}
+
+.project-card:nth-child(3):hover {
+    box-shadow: 0 20px 40px rgba(255, 234, 0, 0.3);
 }
 
 .project-card h3 {
@@ -135,23 +153,33 @@ header h1 {
     font-weight: 700;
 }
 
-/* Red for checklist */
+/* Vibrant Red for checklist */
 .project-card:nth-child(1) h3 {
-    color: #ff0000;
+    color: #ff1744;
 }
 
-/* Orange for calculator */
+/* Vibrant Orange for calculator */
 .project-card:nth-child(2) h3 {
-    color: #ff7f00;
+    color: #ff9100;
 }
 
-/* Yellow for third project (when you add it) */
+/* Vibrant Yellow for third project */
 .project-card:nth-child(3) h3 {
-    color: #ffff00;
+    color: #ffea00;
+}
+
+/* Vibrant Green for fourth project */
+.project-card:nth-child(4) h3 {
+    color: #00e676;
+}
+
+/* Vibrant Blue for fifth project */
+.project-card:nth-child(5) h3 {
+    color: #00b0ff;
 }
 
 .project-card p {
-    color: #999;
+    color: #aaa;
     line-height: 1.7;
     margin-bottom: 25px;
     font-size: 15px;
@@ -170,24 +198,35 @@ header h1 {
     transition: all 0.3s;
 }
 
-/* Red button for checklist */
+/* Vibrant Red button for checklist */
 .project-card:nth-child(1) .btn {
-    background: #ff0000;
+    background: #ff1744;
 }
 
-/* Orange button for calculator */
+/* Vibrant Orange button for calculator */
 .project-card:nth-child(2) .btn {
-    background: #ff7f00;
+    background: #ff9100;
 }
 
-/* Yellow button for third project */
+/* Vibrant Yellow button for third project */
 .project-card:nth-child(3) .btn {
-    background: #ffff00;
+    background: #ffea00;
+}
+
+/* Vibrant Green button for fourth project */
+.project-card:nth-child(4) .btn {
+    background: #00e676;
+}
+
+/* Vibrant Blue button for fifth project */
+.project-card:nth-child(5) .btn {
+    background: #00b0ff;
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    filter: brightness(1.2);
+    transform: scale(1.08);
+    filter: brightness(1.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
 }
 
 footer {
