@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tetris</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <h1>Tetris</h1>
+        <p class="subtitle">Arrow keys to move, up to rotate, space to drop.</p>
+      </header>
+
+      <section class="game">
+        <canvas id="board" width="300" height="600" aria-label="Tetris board" tabindex="0"></canvas>
+        <aside class="panel">
+          <div class="panel-card">
+            <h2>Score</h2>
+            <p id="score">0</p>
+          </div>
+          <div class="panel-card">
+            <h2>Level</h2>
+            <p id="level">1</p>
+          </div>
+          <div class="panel-card">
+            <h2>Lines</h2>
+            <p id="lines">0</p>
+          </div>
+          <button id="start">Start / Restart</button>
+          <button id="fullscreen">Fullscreen</button>
+        </aside>
+      </section>
+
+      <section class="controls">
+        <h2>Controls</h2>
+        <ul>
+          <li>Left / Right: Move</li>
+          <li>Up: Rotate</li>
+          <li>Down: Soft drop</li>
+          <li>Space: Hard drop</li>
+        </ul>
+      </section>
+
+      <p class="hint">Tip: Click the game area so your keyboard controls work.</p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
