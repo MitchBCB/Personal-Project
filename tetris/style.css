@@ -9,6 +9,10 @@ body {
   color: #e5e7eb;
 }
 
+body.is-fullscreen {
+  overflow: hidden;
+}
+
 .page {
   max-width: 1000px;
   margin: 0 auto;
@@ -41,7 +45,7 @@ canvas {
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
 }
 
 .panel {
@@ -109,6 +113,24 @@ canvas {
 .hint {
   margin: 0;
   color: #9aa4b2;
+}
+
+body.is-fullscreen .page {
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 24px;
+  justify-content: center;
+  gap: 16px;
+}
+
+body.is-fullscreen .game {
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+body.is-fullscreen canvas {
+  max-width: min(70vw, 520px);
 }
 
 @media (max-width: 720px) {
