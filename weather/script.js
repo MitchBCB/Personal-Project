@@ -1,5 +1,8 @@
-// OpenWeatherMap API key (set window.OPENWEATHER_API_KEY or localStorage key)
-const API_KEY = window.OPENWEATHER_API_KEY || localStorage.getItem('OPENWEATHER_API_KEY') || '';
+// OpenWeatherMap API key (set data-api-key, window.OPENWEATHER_API_KEY, or localStorage key)
+const API_KEY = document.body.dataset.apiKey
+    || window.OPENWEATHER_API_KEY
+    || localStorage.getItem('OPENWEATHER_API_KEY')
+    || '';
 
 // Get elements from HTML
 const cityInput = document.getElementById('cityInput');
@@ -248,7 +251,7 @@ async function getWeather(city) {
     }
 
     if (!API_KEY) {
-        weatherDisplay.innerHTML = '<p class="error">❌ Missing API key. Set window.OPENWEATHER_API_KEY or localStorage "OPENWEATHER_API_KEY".</p>';
+        weatherDisplay.innerHTML = '<p class="error">❌ Missing API key. Add data-api-key to &lt;body&gt;, set window.OPENWEATHER_API_KEY, or use localStorage "OPENWEATHER_API_KEY".</p>';
         return;
     }
     
