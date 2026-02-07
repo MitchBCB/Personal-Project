@@ -3,68 +3,196 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Typing Speed Test</title>
+  <title>Typing Test Leaderboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="page">
     <header class="page-header">
-      <h1>Typing Speed Test</h1>
-      <p class="subtitle">Type the text below as quickly and accurately as you can.</p>
+      <h1>Typing Test</h1>
+      <p class="subtitle">Practice typing, save your scores, and see the leaderboard.</p>
     </header>
 
-    <main>
-      <section class="card target-card" aria-live="polite">
-        <h2>Target Text</h2>
-        <p id="targetText" class="target-text"></p>
-      </section>
-
-      <section class="card input-card">
-        <h2>Your Typing</h2>
-        <p id="hint" class="hint">Start typing to begin.</p>
-        <textarea
-          id="typingInput"
-          placeholder="Start typing here..."
-          rows="5"
-          spellcheck="false"
-          autocomplete="off"
-          aria-label="Typing area"
-        ></textarea>
-      </section>
-
-      <section class="stats-grid" aria-live="polite">
-        <div class="card stat-card">
-          <h3>WPM</h3>
-          <p id="wpmValue">0</p>
+    <main class="stack">
+      <section class="card" aria-live="polite">
+        <div class="card-header">
+          <h2>Account</h2>
+          <span id="authStatus" class="status">Signed out</span>
         </div>
-        <div class="card stat-card">
-          <h3>Accuracy</h3>
-          <p id="accuracyValue">100%</p>
+        <div class="field-grid">
+          <label class="field">
+            <span>Email</span>
+            <input type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password">
+          </label>
         </div>
-        <div class="card stat-card">
-          <h3>Time</h3>
-          <p id="timeValue">0s</p>
+        <div class="button-row">
+          <button type="button" id="signUpButton">Sign up</button>
+          <button type="button" id="signInButton">Sign in</button>
+          <button type="button" id="signOutButton" class="ghost" disabled>Sign out</button>
+          <button type="button" id="editUsernameButton" class="ghost" hidden>Edit username</button>
+        </div>
+        <p id="authMessage" class="helper"></p>
+      </section>
+
+      <section class="card" id="usernameCard" hidden>
+        <div class="card-header">
+          <h2>Choose a username</h2>
+        </div>
+        <p class="helper">3–20 characters. Letters, numbers, and underscores only.</p>
+        <label class="field">
+          <span>Username</span>
+          <input type="text" id="usernameInput" placeholder="typing_master">
+        </label>
+        <div class="button-row">
+          <button type="button" id="saveUsernameButton">Save username</button>
+        </div>
+        <p id="usernameMessage" class="helper"></p>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <h2>Typing test</h2>
+        </div>
+        <div class="controls">
+          <label class="field">
+            <span>Mode</span>
+            <select id="modeSelect">
+              <option value="words">Words</option>
+              <option value="quotes">Quotes</option>
+            </select>
+          </label>
+          <div class="field">
+            <span>Duration</span>
+            <div class="button-row" id="durationButtons">
+              <button type="button" data-duration="15">15s</button>
+              <button type="button" data-duration="30" class="active">30s</button>
+              <button type="button" data-duration="60">60s</button>
+            </div>
+          </div>
+          <div class="field">
+            <span>&nbsp;</span>
+            <button type="button" id="startButton">Start</button>
+          </div>
+        </div>
+
+        <div id="targetDisplay" class="target-text" aria-live="polite"></div>
+
+        <label class="field">
+          <span>Type here</span>
+          <input
+            type="text"
+            id="typingInput"
+            placeholder="Start typing to begin..."
+            autocomplete="off"
+            spellcheck="false"
+            autocapitalize="off"
+          >
+        </label>
+
+        <div class="stats">
+          <div>
+            <p class="stat-label">Time left</p>
+            <p class="stat-value" id="timerValue">30s</p>
+          </div>
+          <div>
+            <p class="stat-label">Live WPM</p>
+            <p class="stat-value" id="liveWpm">0</p>
+          </div>
+          <div>
+            <p class="stat-label">Live accuracy</p>
+            <p class="stat-value" id="liveAccuracy">100%</p>
+          </div>
         </div>
       </section>
 
-      <section class="card final-card" id="finalCard" hidden>
-        <h2>Final Stats</h2>
-        <ul>
-          <li><strong>Time:</strong> <span id="finalTime">0s</span></li>
-          <li><strong>WPM:</strong> <span id="finalWpm">0</span></li>
-          <li><strong>Accuracy:</strong> <span id="finalAccuracy">100%</span></li>
-          <li><strong>Correct characters:</strong> <span id="finalCorrect">0</span></li>
-          <li><strong>Mistakes:</strong> <span id="finalMistakes">0</span></li>
-        </ul>
+      <section class="card" id="resultsCard" hidden>
+        <div class="card-header">
+          <h2>Results</h2>
+        </div>
+        <div class="results-grid">
+          <div>
+            <p class="stat-label">WPM</p>
+            <p class="stat-value" id="resultWpm">0</p>
+          </div>
+          <div>
+            <p class="stat-label">Accuracy</p>
+            <p class="stat-value" id="resultAccuracy">0%</p>
+          </div>
+          <div>
+            <p class="stat-label">Correct chars</p>
+            <p class="stat-value" id="resultCorrect">0</p>
+          </div>
+          <div>
+            <p class="stat-label">Total typed</p>
+            <p class="stat-value" id="resultTotal">0</p>
+          </div>
+          <div>
+            <p class="stat-label">Duration</p>
+            <p class="stat-value" id="resultDuration">30s</p>
+          </div>
+          <div>
+            <p class="stat-label">Mode</p>
+            <p class="stat-value" id="resultMode">words</p>
+          </div>
+        </div>
+        <div class="button-row">
+          <button type="button" id="submitScoreButton" disabled>Submit score</button>
+        </div>
+        <p id="submitMessage" class="helper"></p>
       </section>
 
-      <section class="actions">
-        <button type="button" id="newTextButton">New text</button>
-        <button type="button" id="restartButton">Restart</button>
+      <section class="card">
+        <div class="card-header">
+          <h2>Leaderboard</h2>
+          <button type="button" id="refreshLeaderboard" class="ghost">Refresh</button>
+        </div>
+        <div class="controls">
+          <label class="field">
+            <span>Mode</span>
+            <select id="leaderboardMode">
+              <option value="words">Words</option>
+              <option value="quotes">Quotes</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Duration</span>
+            <select id="leaderboardDuration">
+              <option value="15">15s</option>
+              <option value="30" selected>30s</option>
+              <option value="60">60s</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>WPM</th>
+                <th>Accuracy</th>
+                <th>Duration</th>
+                <th>Mode</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardBody">
+              <tr>
+                <td colspan="7" class="muted">Loading leaderboard...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="leaderboardMessage" class="helper"></p>
       </section>
     </main>
   </div>
 
-  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
