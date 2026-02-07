@@ -46,6 +46,8 @@ header h1 {
     margin-bottom: 60px;
 }
 .project-card {
+    --card-color: #2a2a2a;
+    --card-glow: rgba(255, 255, 255, 0.1);
     background: #1a1a1a;
     border-radius: 16px;
     padding: 35px;
@@ -92,12 +94,19 @@ header h1 {
     background: #9400d3; /* Violet */
     transform: scaleX(0);
 }
+.project-card[class*="card--"]::before {
+    background: var(--card-color);
+    transform: scaleX(0);
+}
 .project-card:hover::before {
     transform: scaleX(1);
 }
 .project-card:hover {
     transform: translateY(-8px);
     border-color: #3a3a3a;
+}
+.project-card[class*="card--"]:hover {
+    box-shadow: 0 20px 40px var(--card-glow);
 }
 /* Red glow for first project */
 .project-card:nth-child(1):hover {
@@ -124,6 +133,9 @@ header h1 {
 /* Yellow for third project (when you add it) */
 .project-card:nth-child(3) h3 {
     color: #ffff00;
+}
+.project-card[class*="card--"] h3 {
+    color: var(--card-color);
 }
 .project-card p {
     color: #999;
@@ -155,9 +167,40 @@ header h1 {
 .project-card:nth-child(3) .btn {
     background: #ffff00;
 }
+.project-card[class*="card--"] .btn {
+    background: var(--card-color);
+}
 .btn:hover {
     transform: scale(1.05);
     filter: brightness(1.2);
+}
+.card--red {
+    --card-color: #ff0000;
+    --card-glow: rgba(255, 0, 0, 0.2);
+}
+.card--orange {
+    --card-color: #ff7f00;
+    --card-glow: rgba(255, 127, 0, 0.2);
+}
+.card--yellow {
+    --card-color: #ffff00;
+    --card-glow: rgba(255, 255, 0, 0.2);
+}
+.card--green {
+    --card-color: #00ff00;
+    --card-glow: rgba(0, 255, 0, 0.2);
+}
+.card--blue {
+    --card-color: #0000ff;
+    --card-glow: rgba(0, 0, 255, 0.2);
+}
+.card--indigo {
+    --card-color: #4b0082;
+    --card-glow: rgba(75, 0, 130, 0.2);
+}
+.card--violet {
+    --card-color: #9400d3;
+    --card-glow: rgba(148, 0, 211, 0.2);
 }
 footer {
     text-align: center;

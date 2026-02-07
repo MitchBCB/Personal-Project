@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Typing Speed Test</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>Typing Speed Test</h1>
+      <p class="subtitle">Type the text below as quickly and accurately as you can.</p>
+    </header>
+
+    <main>
+      <section class="card target-card" aria-live="polite">
+        <h2>Target Text</h2>
+        <p id="targetText" class="target-text"></p>
+      </section>
+
+      <section class="card input-card">
+        <h2>Your Typing</h2>
+        <p id="hint" class="hint">Start typing to begin.</p>
+        <textarea
+          id="typingInput"
+          placeholder="Start typing here..."
+          rows="5"
+          spellcheck="false"
+          autocomplete="off"
+          aria-label="Typing area"
+        ></textarea>
+      </section>
+
+      <section class="stats-grid" aria-live="polite">
+        <div class="card stat-card">
+          <h3>WPM</h3>
+          <p id="wpmValue">0</p>
+        </div>
+        <div class="card stat-card">
+          <h3>Accuracy</h3>
+          <p id="accuracyValue">100%</p>
+        </div>
+        <div class="card stat-card">
+          <h3>Time</h3>
+          <p id="timeValue">0s</p>
+        </div>
+      </section>
+
+      <section class="card final-card" id="finalCard" hidden>
+        <h2>Final Stats</h2>
+        <ul>
+          <li><strong>Time:</strong> <span id="finalTime">0s</span></li>
+          <li><strong>WPM:</strong> <span id="finalWpm">0</span></li>
+          <li><strong>Accuracy:</strong> <span id="finalAccuracy">100%</span></li>
+          <li><strong>Correct characters:</strong> <span id="finalCorrect">0</span></li>
+          <li><strong>Mistakes:</strong> <span id="finalMistakes">0</span></li>
+        </ul>
+      </section>
+
+      <section class="actions">
+        <button type="button" id="newTextButton">New text</button>
+        <button type="button" id="restartButton">Restart</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
