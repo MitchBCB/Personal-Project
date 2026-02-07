@@ -5,7 +5,7 @@
 //  - window.OPENWEATHER_API_KEY = "..."
 //  - localStorage key "OPENWEATHER_API_KEY"
 
-const API_KEY_HARDCODED = '79a0728d7b60a0f3852a84e7efbbab0c'; // <-- paste your key here (between the quotes)
+const API_KEY_HARDCODED = '05f633e3922682c4919397fcfea7f33e'; // <-- paste your key here (between the quotes)
 
 function resolveApiKey() {
     return (
