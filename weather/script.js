@@ -1,7 +1,8 @@
 // OpenWeatherMap API key (set data-api-key, window.OPENWEATHER_API_KEY, or localStorage key)
 const API_KEY = document.body.dataset.apiKey
     || window.OPENWEATHER_API_KEY
-    || localStorage.getItem('OPENWEATHER_API_KEY')
+    localStorage.setItem('OPENWEATHER_API_KEY', '79a0728d7b60a0f3852a84e7efbbab0c');
+    location.reload()
     || '';
 
 // Get elements from HTML
