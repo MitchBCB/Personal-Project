@@ -4,8 +4,10 @@ const scoreEl = document.getElementById("score");
 const levelEl = document.getElementById("level");
 const linesEl = document.getElementById("lines");
 const startButton = document.getElementById("start");
+const fullscreenButton = document.getElementById("fullscreen");
+const page = document.querySelector(".page");
 
-const blockSize = 24;
+const blockSize = 30;
 const columns = 10;
 const rows = 20;
 
@@ -258,10 +260,19 @@ function startGame() {
   isRunning = true;
   lastTime = 0;
   dropCounter = 0;
+  canvas.focus();
   requestAnimationFrame(update);
 }
 
+canvas.addEventListener("click", () => {
+  canvas.focus();
+});
+
 document.addEventListener("keydown", (event) => {
+  const blockedKeys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "];
+  if (isRunning && blockedKeys.includes(event.key)) {
+    event.preventDefault();
+  }
   if (!isRunning) {
     return;
   }
@@ -281,6 +292,14 @@ document.addEventListener("keydown", (event) => {
 
 startButton.addEventListener("click", () => {
   startGame();
+});
+
+fullscreenButton.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    page.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
 });
 
 updateStats();
