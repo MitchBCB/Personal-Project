@@ -4,7 +4,7 @@
 Simple static website (HTML/CSS/JS). No frameworks.
 
 ## Rules
-- Make small changes: max 1–3 files per task.
+- Make small changes: max 1–3 files per task.more only if necessary to everyting
 - Do not rename files or restructure folders unless I ask.
 - Do not add dependencies unless I ask.
 - Keep the current style and formatting.
@@ -14,6 +14,7 @@ Simple static website (HTML/CSS/JS). No frameworks.
   - what you changed
   - where you changed it
   - why you changed it
+  - also if i need to add anyhting like if were using an api key prompt me to place that somewhere etc
 
 ## Output
 - Prefer a unified diff patch or a PR-ready change list.
