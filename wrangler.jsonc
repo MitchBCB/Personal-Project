@@ -1,5 +1,12 @@
 {
   "name": "typing-test-api",
   "main": "src/index.js",
-  "compatibility_date": "2026-02-07"
+  "compatibility_date": "2026-02-07",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "typing-test-db",
+      "database_id": "<YOUR_DATABASE_ID>"
+    }
+  ]
 }
