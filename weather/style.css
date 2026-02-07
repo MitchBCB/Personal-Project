@@ -4,9 +4,22 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-start: #0f172a;
+    --bg-end: #1e293b;
+    --text-color: #f8fafc;
+    --muted-text: rgba(248, 250, 252, 0.7);
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(148, 163, 184, 0.35);
+    --control-bg: rgba(15, 23, 42, 0.6);
+    --control-border: rgba(148, 163, 184, 0.45);
+    --accent: rgba(248, 250, 252, 0.2);
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1a1a1a;
+    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+    color: var(--text-color);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -15,19 +28,44 @@ body {
     transition: background 0.5s ease;
 }
 
+.effects-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.dev-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(15, 23, 42, 0.8);
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    z-index: 2;
+}
+
 .container {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
     backdrop-filter: blur(10px);
     padding: 40px;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--card-border);
     max-width: 500px;
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 h1 {
     text-align: center;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 30px;
     font-size: 36px;
 }
@@ -42,22 +80,22 @@ h1 {
     flex: 1;
     padding: 15px;
     font-size: 16px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--control-bg);
+    border: 1px solid var(--control-border);
     border-radius: 10px;
-    color: #fff;
+    color: var(--text-color);
     outline: none;
 }
 
 #cityInput::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--muted-text);
 }
 
 #searchBtn {
     padding: 15px 30px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--accent);
+    color: var(--text-color);
+    border: 1px solid var(--control-border);
     border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
@@ -66,17 +104,17 @@ h1 {
 }
 
 #searchBtn:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.32);
 }
 
 .weather-display {
     text-align: center;
     padding: 20px;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .instruction {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--muted-text);
     font-size: 18px;
 }
 
@@ -107,7 +145,7 @@ h1 {
 }
 
 .detail-item {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
     padding: 15px;
     border-radius: 10px;
 }
@@ -129,6 +167,147 @@ h1 {
 }
 
 .loading {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--muted-text);
     font-size: 18px;
+}
+
+body[data-theme="clear"] {
+    --bg-start: #f7c94b;
+    --bg-end: #f39d6a;
+    --text-color: #1f2937;
+    --muted-text: rgba(31, 41, 55, 0.7);
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(148, 163, 184, 0.5);
+    --control-bg: rgba(255, 255, 255, 0.7);
+    --control-border: rgba(148, 163, 184, 0.6);
+    --accent: rgba(255, 255, 255, 0.55);
+}
+
+body[data-theme="clouds"] {
+    --bg-start: #8897a6;
+    --bg-end: #b6c1cc;
+    --text-color: #f8fafc;
+    --muted-text: rgba(248, 250, 252, 0.7);
+    --card-bg: rgba(38, 49, 63, 0.65);
+    --card-border: rgba(148, 163, 184, 0.4);
+    --control-bg: rgba(38, 49, 63, 0.55);
+    --control-border: rgba(148, 163, 184, 0.45);
+    --accent: rgba(248, 250, 252, 0.2);
+}
+
+body[data-theme="rain"],
+body[data-theme="drizzle"] {
+    --bg-start: #1f3b63;
+    --bg-end: #2b5a7a;
+    --text-color: #f8fafc;
+    --muted-text: rgba(248, 250, 252, 0.75);
+    --card-bg: rgba(10, 25, 47, 0.65);
+    --card-border: rgba(125, 176, 220, 0.4);
+    --control-bg: rgba(10, 25, 47, 0.55);
+    --control-border: rgba(125, 176, 220, 0.45);
+    --accent: rgba(125, 176, 220, 0.35);
+}
+
+body[data-theme="snow"] {
+    --bg-start: #d8e4f0;
+    --bg-end: #b7c7dd;
+    --text-color: #1f2937;
+    --muted-text: rgba(31, 41, 55, 0.7);
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-border: rgba(148, 163, 184, 0.45);
+    --control-bg: rgba(255, 255, 255, 0.7);
+    --control-border: rgba(148, 163, 184, 0.5);
+    --accent: rgba(255, 255, 255, 0.6);
+}
+
+body[data-theme="thunderstorm"] {
+    --bg-start: #2c3443;
+    --bg-end: #0f172a;
+    --text-color: #f8fafc;
+    --muted-text: rgba(248, 250, 252, 0.7);
+    --card-bg: rgba(10, 15, 25, 0.7);
+    --card-border: rgba(148, 163, 184, 0.35);
+    --control-bg: rgba(10, 15, 25, 0.6);
+    --control-border: rgba(148, 163, 184, 0.35);
+    --accent: rgba(248, 250, 252, 0.18);
+}
+
+body[data-theme="fog"] {
+    --bg-start: #9ca6b4;
+    --bg-end: #6b7280;
+    --text-color: #f8fafc;
+    --muted-text: rgba(248, 250, 252, 0.7);
+    --card-bg: rgba(55, 65, 81, 0.6);
+    --card-border: rgba(209, 213, 219, 0.35);
+    --control-bg: rgba(55, 65, 81, 0.5);
+    --control-border: rgba(209, 213, 219, 0.35);
+    --accent: rgba(248, 250, 252, 0.2);
+}
+
+body[data-time="night"][data-theme="clear"] {
+    --bg-start: #0b1026;
+    --bg-end: #132347;
+    --text-color: #e2e8f0;
+    --muted-text: rgba(226, 232, 240, 0.7);
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(148, 163, 184, 0.35);
+    --control-bg: rgba(15, 23, 42, 0.6);
+    --control-border: rgba(148, 163, 184, 0.35);
+    --accent: rgba(148, 163, 184, 0.3);
+}
+
+body[data-time="night"][data-theme="clouds"] {
+    --bg-start: #1f2937;
+    --bg-end: #111827;
+    --text-color: #e2e8f0;
+    --muted-text: rgba(226, 232, 240, 0.65);
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(148, 163, 184, 0.35);
+    --control-bg: rgba(15, 23, 42, 0.6);
+    --control-border: rgba(148, 163, 184, 0.35);
+    --accent: rgba(148, 163, 184, 0.3);
+}
+
+body[data-time="night"][data-theme="rain"],
+body[data-time="night"][data-theme="drizzle"],
+body[data-time="night"][data-theme="thunderstorm"] {
+    --bg-start: #0b1c30;
+    --bg-end: #0b1324;
+    --text-color: #e2e8f0;
+    --muted-text: rgba(226, 232, 240, 0.65);
+    --card-bg: rgba(9, 16, 34, 0.7);
+    --card-border: rgba(100, 116, 139, 0.35);
+    --control-bg: rgba(9, 16, 34, 0.6);
+    --control-border: rgba(100, 116, 139, 0.35);
+    --accent: rgba(148, 163, 184, 0.25);
+}
+
+body[data-time="night"][data-theme="snow"] {
+    --bg-start: #1f2a44;
+    --bg-end: #0f172a;
+    --text-color: #e2e8f0;
+    --muted-text: rgba(226, 232, 240, 0.65);
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(148, 163, 184, 0.35);
+    --control-bg: rgba(15, 23, 42, 0.6);
+    --control-border: rgba(148, 163, 184, 0.35);
+    --accent: rgba(148, 163, 184, 0.3);
+}
+
+body[data-time="night"][data-theme="fog"] {
+    --bg-start: #334155;
+    --bg-end: #1f2937;
+    --text-color: #e2e8f0;
+    --muted-text: rgba(226, 232, 240, 0.65);
+    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-border: rgba(148, 163, 184, 0.35);
+    --control-bg: rgba(15, 23, 42, 0.6);
+    --control-border: rgba(148, 163, 184, 0.35);
+    --accent: rgba(148, 163, 184, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .effects-canvas {
+        display: none;
+    }
 }
