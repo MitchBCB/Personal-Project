@@ -5,16 +5,12 @@
 
 body {
   margin: 0;
-  background: #0b0f1a;
-  color: #e5e7eb;
-}
-
-body.is-fullscreen {
-  overflow: hidden;
+  background: #f4f5f9;
+  color: #1b1f2a;
 }
 
 .page {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 32px 20px 48px;
   display: flex;
@@ -29,7 +25,7 @@ h1 {
 
 .subtitle {
   margin: 0;
-  color: #9aa4b2;
+  color: #5b6478;
 }
 
 .game {
@@ -40,12 +36,12 @@ h1 {
 }
 
 canvas {
-  background: #050713;
+  background: #111827;
   border: 4px solid #1f2937;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2);
   width: 100%;
-  max-width: 380px;
+  max-width: 420px;
 }
 
 .panel {
@@ -55,7 +51,7 @@ canvas {
 }
 
 .panel-card {
-  background: #111827;
+  background: #ffffff;
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
@@ -64,7 +60,7 @@ canvas {
 .panel-card h2 {
   margin: 0 0 8px;
   font-size: 1rem;
-  color: #cbd5f5;
+  color: #374151;
 }
 
 .panel-card p {
@@ -91,7 +87,7 @@ canvas {
 }
 
 .controls {
-  background: #111827;
+  background: #ffffff;
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
@@ -100,37 +96,19 @@ canvas {
 .controls h2 {
   margin: 0 0 12px;
   font-size: 1.1rem;
-  color: #cbd5f5;
+  color: #374151;
 }
 
 .controls ul {
   margin: 0;
   padding-left: 18px;
-  color: #9aa4b2;
+  color: #5b6478;
   line-height: 1.6;
 }
 
 .hint {
   margin: 0;
-  color: #9aa4b2;
-}
-
-body.is-fullscreen .page {
-  max-width: 1200px;
-  min-height: 100vh;
-  padding: 24px;
-  justify-content: center;
-  gap: 16px;
-}
-
-body.is-fullscreen .game {
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-body.is-fullscreen canvas {
-  max-width: min(70vw, 520px);
+  color: #5b6478;
 }
 
 @media (max-width: 720px) {

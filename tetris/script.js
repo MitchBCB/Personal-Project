@@ -7,19 +7,19 @@ const startButton = document.getElementById("start");
 const fullscreenButton = document.getElementById("fullscreen");
 const page = document.querySelector(".page");
 
-const blockSize = 24;
+const blockSize = 30;
 const columns = 10;
 const rows = 20;
 
 const colors = [
   null,
-  "#ff7b00",
-  "#00f5a0",
-  "#3df5ff",
-  "#ffe600",
-  "#c56bff",
-  "#ff2d55",
-  "#00d2ff",
+  "#f97316",
+  "#22c55e",
+  "#3b82f6",
+  "#facc15",
+  "#a855f7",
+  "#ef4444",
+  "#14b8a6",
 ];
 
 const shapes = [
@@ -71,9 +71,7 @@ let lines = 0;
 let level = 1;
 let isRunning = false;
 
-const scaleX = canvas.width / (columns * blockSize);
-const scaleY = canvas.height / (rows * blockSize);
-context.setTransform(scaleX, 0, 0, scaleY, 0, 0);
+context.scale(1, 1);
 
 function createBoard() {
   return Array.from({ length: rows }, () => Array(columns).fill(0));
@@ -227,7 +225,7 @@ function drawBlock(value, x, y) {
 }
 
 function draw() {
-  context.fillStyle = "#050713";
+  context.fillStyle = "#111827";
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   board.forEach((row, y) => {
@@ -298,17 +296,9 @@ startButton.addEventListener("click", () => {
 
 fullscreenButton.addEventListener("click", () => {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
+    page.requestFullscreen();
   } else {
     document.exitFullscreen();
-  }
-});
-
-document.addEventListener("fullscreenchange", () => {
-  if (document.fullscreenElement) {
-    document.body.classList.add("is-fullscreen");
-  } else {
-    document.body.classList.remove("is-fullscreen");
   }
 });
 
