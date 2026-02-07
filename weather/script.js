@@ -1,9 +1,21 @@
-// OpenWeatherMap API key (set data-api-key, window.OPENWEATHER_API_KEY, or localStorage key)
-const API_KEY = document.body.dataset.apiKey
-    || window.79a0728d7b60a0f3852a84e7efbbab0c
-    localStorage.setItem('OPENWEATHER_API_KEY', '79a0728d7b60a0f3852a84e7efbbab0c');
-    location.reload()
-    || '';
+// OpenWeatherMap API key
+// Easiest: paste your key into API_KEY_HARDCODED below.
+// Fallbacks still supported:
+//  - <body data-api-key="...">
+//  - window.OPENWEATHER_API_KEY = "..."
+//  - localStorage key "OPENWEATHER_API_KEY"
+
+const API_KEY_HARDCODED = '79a0728d7b60a0f3852a84e7efbbab0c'; // <-- paste your key here (between the quotes)
+
+function resolveApiKey() {
+    return (
+        (API_KEY_HARDCODED && API_KEY_HARDCODED.trim()) ||
+        (document.body && document.body.dataset && document.body.dataset.apiKey) ||
+        window.OPENWEATHER_API_KEY ||
+        localStorage.getItem('OPENWEATHER_API_KEY') ||
+        ''
+    );
+}
 
 // Get elements from HTML
 const cityInput = document.getElementById('cityInput');
@@ -251,32 +263,69 @@ async function getWeather(city) {
         return;
     }
 
-    if (!API_KEY) {
-        weatherDisplay.innerHTML = '<p class="error">❌ Missing API key. Add data-api-key to &lt;body&gt;, set window.OPENWEATHER_API_KEY, or use localStorage "OPENWEATHER_API_KEY".</p>';
+    const apiKey = resolveApiKey();
+    if (!apiKey) {
+        weatherDisplay.innerHTML = `
+            <p class="error">
+                ❌ Missing API key.<br>
+                Put it in <code>API_KEY_HARDCODED</code> (top of this file),
+                or set <code>data-api-key</code> on &lt;body&gt;,
+                or set <code>window.OPENWEATHER_API_KEY</code>,
+                or use localStorage <code>"OPENWEATHER_API_KEY"</code>.
+            </p>`;
         return;
     }
-    
+
     try {
         // Build the API URL with the city name and API key
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
-        
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
         // Fetch data from the API
         const response = await fetch(url);
-        
-        // Check if the request was successful
+
         if (!response.ok) {
-            throw new Error('City not found');
+            let errMsg = 'Request failed';
+            try {
+                const errData = await response.json();
+                if (errData && errData.message) errMsg = errData.message;
+            } catch (_) {}
+
+            if (response.status === 401) {
+                weatherDisplay.innerHTML = `
+                    <p class="error">
+                        ❌ OpenWeather error 401 (Unauthorised).<br>
+                        Your API key is missing/wrong or not active yet.<br>
+                        Message: <code>${errMsg}</code>
+                    </p>`;
+                return;
+            }
+
+            if (response.status === 404) {
+                weatherDisplay.innerHTML = `
+                    <p class="error">
+                        ❌ City not found (404). Check spelling and try again.<br>
+                        Message: <code>${errMsg}</code>
+                    </p>`;
+                return;
+            }
+
+            weatherDisplay.innerHTML = `
+                <p class="error">
+                    ❌ Error ${response.status}.<br>
+                    Message: <code>${errMsg}</code>
+                </p>`;
+            return;
         }
-        
+
         // Convert response to JSON (JavaScript Object)
         const data = await response.json();
-        
+
         // Display the weather data
         displayWeather(data);
-        
+
         // Change theme and effects based on weather
         updateThemeAndEffects(data);
-        
+
     } catch (error) {
         // Show error message if something went wrong
         weatherDisplay.innerHTML = `<p class="error">❌ ${error.message}. Please try again.</p>`;
@@ -292,14 +341,14 @@ function displayWeather(data) {
     const description = data.weather[0].description;
     const cityName = data.name;
     const country = data.sys.country;
-    
+
     // Create HTML with weather information
     const weatherHTML = `
         <div class="weather-info">
             <h2 class="city-name">${cityName}, ${country}</h2>
             <div class="temperature">${temp}°C</div>
             <div class="description">${description}</div>
-            
+
             <div class="details">
                 <div class="detail-item">
                     <div class="detail-label">Feels Like</div>
@@ -320,7 +369,7 @@ function displayWeather(data) {
             </div>
         </div>
     `;
-    
+
     weatherDisplay.innerHTML = weatherHTML;
 }
 
@@ -400,12 +449,12 @@ function renderMockWeather(condition) {
 // Event listener for search button
 searchBtn.addEventListener('click', function() {
     const city = cityInput.value.trim();
-    
+
     if (city === '') {
         weatherDisplay.innerHTML = '<p class="error">❌ Please enter a city name</p>';
         return;
     }
-    
+
     getWeather(city);
 });
 
